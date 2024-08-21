@@ -1,31 +1,48 @@
 extends CharacterBody3D
 
+# Скорость вращения камеры
+var mouse_sensitivity = 0.001
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+# Углы вращения
+var rotation_x = 0.0
+var rotation_y = 0.0
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+# Скорость движения игрока
+var speed = 5.0
 
+# Ссылка на камеру
+var camera: Camera3D
 
-func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y -= gravity * delta
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	camera = $Camera3D
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+func _input(event):
+	if event is InputEventMouseMotion:
+		rotation_x -= event.relative.y * mouse_sensitivity
+		rotation_y -= event.relative.x * mouse_sensitivity
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		# Ограничиваем вращение по оси X, чтобы избежать сальтухи ептить ее в сраку, долго доперал как это сделать
+		rotation_x = clamp(rotation_x, deg_to_rad(-89), deg_to_rad(89))
 
+		# Обновляем вращение камеры
+		camera.rotation_degrees = Vector3(rad_to_deg(rotation_x), rad_to_deg(rotation_y), 0)
+
+func _process(delta):
+	var velocity = Vector3()
+
+	if Input.is_action_pressed("ui_up"):
+		velocity.z -= 1
+	if Input.is_action_pressed("ui_down"):
+		velocity.z += 1
+	if Input.is_action_pressed("ui_left"):
+		velocity.x -= 1
+	if Input.is_action_pressed("ui_right"):
+		velocity.x += 1
+
+	velocity = velocity.normalized() * speed
+	velocity = camera.global_transform.basis * velocity
+	velocity.y = 0
+
+	self.velocity = velocity
 	move_and_slide()
