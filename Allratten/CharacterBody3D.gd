@@ -9,6 +9,7 @@ var rotation_y = 0.0
 
 # Скорость движения игрока
 var speed = 5.0
+var gravity = 50
 
 # Ссылка на камеру
 var camera: Camera3D
@@ -28,21 +29,35 @@ func _input(event):
 		# Обновляем вращение камеры
 		camera.rotation_degrees = Vector3(rad_to_deg(rotation_x), rad_to_deg(rotation_y), 0)
 
-func _process(delta):
-	var velocity = Vector3()
+func _physics_process(delta):
+	var movement = Vector3()
 
 	if Input.is_action_pressed("ui_up"):
-		velocity.z -= 1
+		movement.z -= 1
 	if Input.is_action_pressed("ui_down"):
-		velocity.z += 1
+		movement.z += 1
 	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
+		movement.x -= 1
 	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-
-	velocity = velocity.normalized() * speed
-	velocity = camera.global_transform.basis * velocity
-	velocity.y = 0
-
-	self.velocity = velocity
+		movement.x += 1
+		
+	if Input.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	if Input.is_action_pressed("fire"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		
+	movement = movement.normalized() * speed
+	movement = camera.global_transform.basis * movement
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = 10
+	velocity.y -= gravity * delta
+	
+	self.velocity = Vector3(movement.x, velocity.y, movement.z)
 	move_and_slide()
+	
+	for col_idx in get_slide_collision_count():
+		var col = get_slide_collision(col_idx)
+		if col.get_collider() is RigidBody3D:
+			col.get_collider().apply_central_impulse(-col.get_normal() * 0.3)
+			#col.get_collider().apply_impulse(-col.get_normal() * 0.01, col.get_position())

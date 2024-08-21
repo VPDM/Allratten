@@ -1,9 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsjcod7p3j2l8"]
+[gd_scene load_steps=9 format=3 uid="uid://bsjcod7p3j2l8"]
 
 [ext_resource type="ArrayMesh" uid="uid://druyvf463jyhv" path="res://Allratten/mdls/start_room_Plane.res" id="1_an4n8"]
 [ext_resource type="Script" path="res://Allratten/CharacterBody3D.gd" id="2_f3e1x"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qxsmb"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gfjvm"]
+size = Vector3(0.5, 0.5, 0.5)
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rpmg"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_cpnv7"]
+vertices = PackedVector3Array(-0.25, 0.5, -0.25, -0.25, 0.5, 0.25, 0.5, 0.5, 0.25, 0.5, 0.5, -0.25)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xgofh"]
 
@@ -12,7 +22,17 @@ data = PackedVector3Array(1, 1, -1, 1, 1.3333, -0.3334, 1, 1, -0.3334, 1, 1, -1,
 
 [node name="Node3D" type="Node3D"]
 
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245282, 2.10571, -0.233544)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_qxsmb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_gfjvm")
+
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464586, 0, 0.609384)
 script = ExtResource("2_f3e1x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -24,12 +44,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 current = true
 fov = 53.8636
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_cpnv7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
 physics_material_override = SubResource("PhysicsMaterial_xgofh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
 mesh = ExtResource("1_an4n8")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_qhlp2")
