@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ducn5jstk4vel"
-path.s3tc="res://.godot/imported/r_falls_Base_color.png-8aaef73d47f0c7ce928f3c34db48368c.s3tc.ctex"
+uid="uid://b0rnpm7f6ussm"
+path.s3tc="res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "e350456bd3c6e98621aab1fa12add6d7"
+}
 
 [deps]
 
-source_file="res://Allratten/mdls/r_falls_Base_color.png"
-dest_files=["res://.godot/imported/r_falls_Base_color.png-8aaef73d47f0c7ce928f3c34db48368c.s3tc.ctex"]
+source_file="res://Allratten/mdls/f_map_n_walls_Base_color.png"
+dest_files=["res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.s3tc.ctex"]
 
 [params]
 

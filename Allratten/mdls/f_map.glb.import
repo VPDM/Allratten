@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://8g4mqie20u5r"
-path="res://.godot/imported/start_room.gltf-dabd94710b047def8f59b90f4bde02a3.scn"
+uid="uid://ckgpxmsqehoff"
+path="res://.godot/imported/f_map.glb-d87c2ebc6248070c19ef036dcf15c058.scn"
 
 [deps]
 
-source_file="res://Allratten/mdls/start_room.gltf"
-dest_files=["res://.godot/imported/start_room.gltf-dabd94710b047def8f59b90f4bde02a3.scn"]
+source_file="res://Allratten/mdls/f_map.glb"
+dest_files=["res://.godot/imported/f_map.glb-d87c2ebc6248070c19ef036dcf15c058.scn"]
 
 [params]
 
@@ -31,7 +31,7 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "meshes": {
-"start_room_Plane": {
+"f_map_Plane": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
@@ -39,7 +39,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Allratten/mdls/start_room_Plane.res"
+"save_to_file/path": "res://Allratten/mdls/f_map_Plane.res"
 }
 }
 }

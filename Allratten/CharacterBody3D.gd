@@ -32,13 +32,13 @@ func _input(event):
 func _physics_process(delta):
 	var movement = Vector3()
 
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("up"):
 		movement.z -= 1
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		movement.z += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		movement.x -= 1
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		movement.x += 1
 		
 	if Input.is_action_pressed("ui_cancel"):
