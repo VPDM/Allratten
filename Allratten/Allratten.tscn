@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bsjcod7p3j2l8"]
+[gd_scene load_steps=20 format=3 uid="uid://bsjcod7p3j2l8"]
 
 [ext_resource type="Script" path="res://Allratten/Camera3D.gd" id="2_4g61u"]
 [ext_resource type="Script" path="res://Allratten/CharacterBody3D.gd" id="2_f3e1x"]
@@ -6,12 +6,15 @@
 [ext_resource type="ArrayMesh" uid="uid://doww57xneg15d" path="res://Allratten/mdls/vent_Cube.res" id="3_3itmm"]
 [ext_resource type="ArrayMesh" uid="uid://b0tmpcis81ckn" path="res://Allratten/mdls/m_locker_Cube.res" id="4_wctpx"]
 [ext_resource type="ArrayMesh" uid="uid://b0mut7kjb4c28" path="res://Allratten/mdls/d_locker_Cube.res" id="5_8v0h8"]
+[ext_resource type="Script" path="res://Allratten/RotatableEntity.gd" id="6_xyqg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qxsmb"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gfjvm"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pali3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rpmg"]
 
@@ -50,9 +53,13 @@ shape = SubResource("BoxShape3D_qxsmb")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_gfjvm")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, -2.35462, 0, 0.166969)
+mesh = SubResource("BoxMesh_pali3")
+skeleton = NodePath("../CharacterBody3D")
+
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464586, 0, 0.609384)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35462, 0, 0.166969)
 script = ExtResource("2_f3e1x")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -114,7 +121,9 @@ shape = SubResource("ConcavePolygonShape3D_t13ig")
 environment = SubResource("Environment_6pc1f")
 
 [node name="RigidBody3D2" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92187, 0.00493627, -1.65977)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92187, 0.00493627, -1.65611)
+angular_damp = 11.765
+script = ExtResource("6_xyqg8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
@@ -125,9 +134,10 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_sty03")
 
 [node name="HingeJoint3D" type="HingeJoint3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.76144, 1.0469, -1.67881)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2.76144, 1.04324, -1.65632)
 node_a = NodePath("../StaticBody3D4")
 node_b = NodePath("../RigidBody3D2")
+exclude_nodes_from_collision = false
 angular_limit/enable = true
-angular_limit/upper = 1.95302
-angular_limit/lower = 0.0942478
+angular_limit/upper = 2.23228
+angular_limit/lower = 0.0

@@ -20,14 +20,15 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		rotation_x -= event.relative.y * mouse_sensitivity
-		rotation_y -= event.relative.x * mouse_sensitivity
+		# проверяем управляет ли камера каким нибудь интерактивным объектом
+		if !camera.is_controlling:
+			# Обновляем вращение камеры
+			rotation_x -= event.relative.y * mouse_sensitivity
+			rotation_y -= event.relative.x * mouse_sensitivity
 
-		# Ограничиваем вращение по оси X, чтобы избежать сальтухи ептить ее в сраку, долго доперал как это сделать
-		rotation_x = clamp(rotation_x, deg_to_rad(-89), deg_to_rad(89))
-
-		# Обновляем вращение камеры
-		camera.rotation_degrees = Vector3(rad_to_deg(rotation_x), rad_to_deg(rotation_y), 0)
+			# Ограничиваем вращение по оси X, чтобы избежать сальтухи ептить ее в сраку, долго доперал как это сделать
+			rotation_x = clamp(rotation_x, deg_to_rad(-89), deg_to_rad(89))
+			camera.rotation_degrees = Vector3(rad_to_deg(rotation_x), rad_to_deg(rotation_y), 0)
 
 func _physics_process(delta):
 	var movement = Vector3()
