@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b0rnpm7f6ussm"
-path.s3tc="res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.s3tc.ctex"
+path="res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "e350456bd3c6e98621aab1fa12add6d7"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Allratten/mdls/f_map_n_walls_Base_color.png"
-dest_files=["res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.s3tc.ctex"]
+dest_files=["res://.godot/imported/f_map_n_walls_Base_color.png-230ae921d64ae471ca4001c2c3e8f3d2.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

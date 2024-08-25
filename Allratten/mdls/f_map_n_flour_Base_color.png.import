@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://6cfqtbf370l3"
-path.s3tc="res://.godot/imported/f_map_n_flour_Base_color.png-9ea4ef0a368fb04938b474a70a41d2c3.s3tc.ctex"
+path="res://.godot/imported/f_map_n_flour_Base_color.png-9ea4ef0a368fb04938b474a70a41d2c3.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "0d991d933dacf79475d870121b9572a2"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Allratten/mdls/f_map_n_flour_Base_color.png"
-dest_files=["res://.godot/imported/f_map_n_flour_Base_color.png-9ea4ef0a368fb04938b474a70a41d2c3.s3tc.ctex"]
+dest_files=["res://.godot/imported/f_map_n_flour_Base_color.png-9ea4ef0a368fb04938b474a70a41d2c3.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

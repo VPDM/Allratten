@@ -3,10 +3,9 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dg7ysshx0cg1l"
-path.s3tc="res://.godot/imported/f_map_r_falls_Base_color.png-d72a8f013c4ee32f68906f5d103ff5ce.s3tc.ctex"
+path="res://.godot/imported/f_map_r_falls_Base_color.png-d72a8f013c4ee32f68906f5d103ff5ce.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 generator_parameters={
 "md5": "18373afd099ea8406f0c5caa038665d6"
@@ -15,11 +14,11 @@ generator_parameters={
 [deps]
 
 source_file="res://Allratten/mdls/f_map_r_falls_Base_color.png"
-dest_files=["res://.godot/imported/f_map_r_falls_Base_color.png-d72a8f013c4ee32f68906f5d103ff5ce.s3tc.ctex"]
+dest_files=["res://.godot/imported/f_map_r_falls_Base_color.png-d72a8f013c4ee32f68906f5d103ff5ce.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
