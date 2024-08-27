@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bsjcod7p3j2l8"]
+[gd_scene load_steps=19 format=3 uid="uid://bsjcod7p3j2l8"]
 
 [ext_resource type="Script" path="res://Allratten/Camera3D.gd" id="2_4g61u"]
 [ext_resource type="Script" path="res://Allratten/CharacterBody3D.gd" id="2_f3e1x"]
@@ -9,12 +9,10 @@
 [ext_resource type="Script" path="res://Allratten/RotatableEntity.gd" id="6_xyqg8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qxsmb"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_gfjvm"]
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pali3"]
+size = Vector3(0.2, 0.2, 0.2)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rpmg"]
 
@@ -52,11 +50,6 @@ shape = SubResource("BoxShape3D_qxsmb")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_gfjvm")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, -2.35462, 0, 0.166969)
-mesh = SubResource("BoxMesh_pali3")
-skeleton = NodePath("../CharacterBody3D")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35462, 0, 0.166969)
