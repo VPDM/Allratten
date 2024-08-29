@@ -1,6 +1,5 @@
-[gd_scene load_steps=18 format=3 uid="uid://bsjcod7p3j2l8"]
+[gd_scene load_steps=17 format=3 uid="uid://bsjcod7p3j2l8"]
 
-[ext_resource type="Script" path="res://Allratten/HookesConnector.gd" id="1_wri1e"]
 [ext_resource type="PackedScene" uid="uid://44qrntasqqbd" path="res://Allratten/scenes/player.tscn" id="2_l47mt"]
 [ext_resource type="ArrayMesh" uid="uid://f0w1xjhusn05" path="res://Allratten/mdls/f_map_Plane.res" id="2_qrgck"]
 [ext_resource type="ArrayMesh" uid="uid://doww57xneg15d" path="res://Allratten/mdls/vent_Cube.res" id="3_3itmm"]
@@ -49,25 +48,7 @@ shape = SubResource("BoxShape3D_qxsmb")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 mesh = SubResource("BoxMesh_gfjvm")
 
-[node name="RigidBody3D3" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4171, 0.893094, -0.621717)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D3"]
-shape = SubResource("BoxShape3D_qxsmb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D3"]
-mesh = SubResource("BoxMesh_gfjvm")
-
 [node name="CharacterBody3D" parent="." instance=ExtResource("2_l47mt")]
-
-[node name="Node3D2" type="Node3D" parent="CharacterBody3D/Camera3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0763133, -0.192129, -0.788686)
-
-[node name="hookes_connector" type="Node3D" parent="CharacterBody3D/Camera3D" index="1" node_paths=PackedStringArray("Target", "Body")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0511148, -0.0965433, -0.567813)
-script = ExtResource("1_wri1e")
-Target = NodePath("../Node3D2")
-Body = NodePath("../../../RigidBody3D3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
@@ -138,8 +119,3 @@ exclude_nodes_from_collision = false
 angular_limit/enable = true
 angular_limit/upper = 2.23228
 angular_limit/lower = 0.0
-
-[node name="CharacterBody3D2" parent="." instance=ExtResource("2_l47mt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01893, 0, -0.333192)
-
-[editable path="CharacterBody3D"]
