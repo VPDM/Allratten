@@ -7,7 +7,7 @@ var ray_length = 5.0
 var grab_distance = 1.0
 
 # Ссылка на захваченный объект
-var grabbed_object = null
+var grabbed_object:RigidBody3D = null
 
 # Скорость вращения камеры
 var mouse_sensitivity = 0.001
@@ -93,7 +93,7 @@ func grab_object():
 	var camera_transform = camera.get_global_transform()
 
 	# Объект для представления направления луча, используя глобальное положение и ориентацию камеры
-	var ray_direction = camera_transform.basis.z
+	var ray_direction = -camera_transform.basis.z
 
 	var space_state = get_world_3d().direct_space_state
 
@@ -118,26 +118,34 @@ func grab_object():
 
 	# Если результат содержит объект, с которым пересекается луч, захватываем его
 	if result.get("collider"):
-		grabbed_object = result.get("collider")
-
+		var collider = result.get("collider")
+		# смотрим, если объект который пытаемся взять это не RigidBody3D,
+		# то завершаем функцию, то есть не выполняем дальнейший код
+		if(not collider is RigidBody3D): return
+		# также проверяем нет ли у него функции для управления, 
+		# так исключаем, например, дверцу шкафчика
+		if(collider.has_method("recieve_mouse_control")): return
+		grabbed_object = collider as RigidBody3D
 		# Устанавливаем позицию захваченного объекта в расстоянии grab_distance от камеры в направлении луча
-		grabbed_object.set_transform(Transform3D(Basis.IDENTITY, get_global_transform().origin + get_global_transform().basis.z * grab_distance))
 
-		# Добавляем захваченный объект в древо сцены в качестве дочернего объекта текущего объекта
-		add_child(grabbed_object)
+		# меняем родителя на камеру
+		grabbed_object.reparent(camera)
 
+		#grabbed_object.position = Vector3(1, 0, 0)
 		# Останавливаем физические вычисления для захваченного объекта
 		grabbed_object.set_physics_process(false)
+		grabbed_object.freeze = true
 
 # Функция для освобождения захваченного объекта
 func release_object():
 	# Если объект захвачен, освобождаем его
 	if grabbed_object:
-		# Удаляем захваченный объект из древа сцены
-		grabbed_object.get_parent().remove_child(grabbed_object)
+		# меняем родителя на родителя нода игрока
+		grabbed_object.reparent(get_parent())
 
 		# Возобновляем физические вычисления для захваченного объекта
 		grabbed_object.set_physics_process(true)
+		grabbed_object.freeze = false
 
 		# Устанавливаем ссылку на захваченный объект в null
 		grabbed_object = null
