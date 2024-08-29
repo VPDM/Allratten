@@ -1,12 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://44qrntasqqbd"]
+[gd_scene load_steps=5 format=3 uid="uid://44qrntasqqbd"]
 
 [ext_resource type="Script" path="res://Allratten/CharacterBody3D.gd" id="1_kxdlu"]
 [ext_resource type="Script" path="res://Allratten/Camera3D.gd" id="2_8ycsu"]
+[ext_resource type="Script" path="res://Allratten/HookesConnector.gd" id="3_4ihk0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6rpmg"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.35462, 0, 0.166969)
 script = ExtResource("1_kxdlu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -18,3 +18,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
 current = true
 fov = 53.8636
 script = ExtResource("2_8ycsu")
+
+[node name="HookesConnector" type="Node3D" parent="Camera3D" node_paths=PackedStringArray("Target")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0143042, 0.0861095, -0.621717)
+script = ExtResource("3_4ihk0")
+Target = NodePath("../GrabPoint")
+linearSpringStiffness = 1000
+
+[node name="GrabPoint" type="Node3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.656249)

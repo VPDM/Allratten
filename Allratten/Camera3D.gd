@@ -6,6 +6,7 @@ func _ready():
 	
 var controlling_object = null
 var is_controlling = false
+var grabbed_object:RigidBody3D = null
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -30,9 +31,39 @@ func _physics_process(delta):
 				# устанавливаем состояние управления и объект которым управляем
 				is_controlling = true
 				controlling_object = result.collider
+		else:
+			# при нажатии ЛКМ
+			if Input.is_action_just_pressed("fire"):
+				# если collider это RigidBody3D
+				if result.collider is RigidBody3D:
+					# вызываем функцию захвата, передавая объект из пересечения луча
+					grab_object(result.collider)
+					
+	if Input.is_action_just_pressed("alter_fire"):
+		# выбрасываем предмет задавая силу
+		release_object(10)
 	
 	# при отпускании кнопки ЛКМ сбрасываем состояние управления и объект которым управляем
 	if Input.is_action_just_released("fire"):
 		is_controlling = false
 		controlling_object = null
-			
+		release_object()
+
+func grab_object(object):
+	# присваиваем переменной объект в руке
+	grabbed_object = object
+	# устанавливаем позицию и поворот точки для коннектора
+	$GrabPoint.global_position = grabbed_object.global_position
+	$GrabPoint.global_rotation = grabbed_object.global_rotation
+	# указываем коннектору тело для перетаскивания
+	$HookesConnector.Body = grabbed_object
+	
+func release_object(force=0):
+	# если нечего выкидывать завершаем функцию
+	if not grabbed_object: return
+	# применяем силу из аргумента force
+	grabbed_object.linear_velocity += global_transform.basis.z * -1 * force
+	# очищаем переменную хранящую объект в руке
+	grabbed_object = null
+	# обнуляем тело для коннектора, чтобы он прекратил перетаскивание
+	$HookesConnector.Body = null

@@ -14,12 +14,16 @@ extends Node3D
 
 
 func UpdateVelocity(delta):
+	# если нет ни тела ни точки, завершаем функцию
 	if (Target == null): return
+	if (Body == null): return
 	if (!is_instance_valid(Target)): return;
+	if (!is_instance_valid(Body)): return;
+	
 	var targetTransform:Transform3D  = Target.global_transform;
 	var currentTransform:Transform3D = Body.global_transform;
+	
 	var rotationDifference:Basis = targetTransform.basis * currentTransform.basis.inverse();
-
 	var positionDifference:Vector3 = targetTransform.origin - currentTransform.origin;
 	
 	var force:Vector3 = HookesLaw(positionDifference, Body.linear_velocity, linearSpringStiffness, linearSpringDamping)
@@ -34,7 +38,7 @@ func UpdateVelocity(delta):
 func _physics_process(delta):
 	if(Active): UpdateVelocity(delta);
 
-
+# закон Гука
 func HookesLaw(displacement:Vector3, currentVelocity:Vector3, stiffness:float, damping:float):
-	return (stiffness * displacement) - (damping * currentVelocity);
+	return (stiffness * displacement) - (damping * currentVelocity)
 
